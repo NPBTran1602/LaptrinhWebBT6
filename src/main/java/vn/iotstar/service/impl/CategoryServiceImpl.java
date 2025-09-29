@@ -21,7 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
 	CategoryReponsitory categoryReponsitory;
 
 	public CategoryServiceImpl(CategoryReponsitory categoryRepository) {
-		this.categoryReponsitory = categoryRepository;
+		this.categoryReponsitory = categoryReponsitory;
 	}
 
 	@Override
@@ -84,8 +84,4 @@ public class CategoryServiceImpl implements CategoryService {
 	public Page<Category> findByCategorynameContaining(String name, Pageable pageable) {
 		return categoryReponsitory.findByCategorynameContaining(name, pageable);
 	}
-	
-	
-	
-
 }
