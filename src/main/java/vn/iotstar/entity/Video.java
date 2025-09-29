@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+// thư viện lombox tự động tạo getter setter
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

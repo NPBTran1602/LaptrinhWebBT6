@@ -1,47 +1,46 @@
-package vn.iotstar.controller.admin;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import org.antlr.v4.runtime.misc.Utils;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import jakarta.validation.Valid;
-import vn.iotstar.entity.Category;
-import vn.iotstar.model.CategoryModel;
-import vn.iotstar.service.CategoryService;
-
-@Controller
-@RequestMapping("admin/categories")
-public class Categorycontroller {
-
-	@Autowired
-	CategoryService categoryService;
-
-	@GetMapping("")
-	public String list(ModelMap model) {
-		List<Category> List = categoryService.findAll();
-		model.addAttribute("categories", List);
-		return "admin/categories/list";
-	}
+	package vn.iotstar.controller.admin;
+	
+	import java.util.List;
+	import java.util.Optional;
+	import java.util.stream.Collectors;
+	import java.util.stream.IntStream;
+	
+	import org.springframework.beans.BeanUtils;
+	import org.springframework.beans.factory.annotation.Autowired;
+	import org.springframework.data.domain.Page;
+	import org.springframework.data.domain.PageRequest;
+	import org.springframework.data.domain.Pageable;
+	import org.springframework.data.domain.Sort;
+	import org.springframework.stereotype.Controller;
+	import org.springframework.ui.ModelMap;
+	import org.springframework.util.StringUtils;
+	import org.springframework.validation.BindingResult;
+	import org.springframework.web.bind.annotation.GetMapping;
+	import org.springframework.web.bind.annotation.ModelAttribute;
+	import org.springframework.web.bind.annotation.PathVariable;
+	import org.springframework.web.bind.annotation.PostMapping;
+	import org.springframework.web.bind.annotation.RequestMapping;
+	import org.springframework.web.bind.annotation.RequestParam;
+	import org.springframework.web.servlet.ModelAndView;
+	
+	import jakarta.validation.Valid;
+	import vn.iotstar.entity.Category;
+	import vn.iotstar.model.CategoryModel;
+	import vn.iotstar.service.CategoryService;
+	
+	@Controller
+	@RequestMapping("admin/categories")
+	public class Categorycontroller {
+	
+		@Autowired
+		CategoryService categoryService;
+	
+		@GetMapping("")
+		public String list(ModelMap model) {
+			List<Category> List = categoryService.findAll();
+			model.addAttribute("categories", List);
+			return "admin/categories/list";
+		}
 
 	@GetMapping("add")
 	public String Add(ModelMap model) {
@@ -52,7 +51,9 @@ public class Categorycontroller {
 	}
 
 	@PostMapping("saveOrUpdate")
-	public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("category") CategoryModel cate,
+	public ModelAndView saveOrUpdate(
+			ModelMap model, 
+			@Valid @ModelAttribute("category") CategoryModel cate, // ánh xạ dữ liệu từ form vào categoryModel
 			BindingResult result) {
 		if (result.hasErrors()) {
 			return new ModelAndView("admin/categories/addOrEdit");
